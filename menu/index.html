@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Full Screen Video</title>
+    <style>
+        html, body {
+            height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        video {
+            width: 100vw;
+            height: 100vh;
+            object-fit: cover;
+            display: block;
+            position: fixed;
+        }
+        .popup {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+        .popup-content {
+            background: #fff;
+            padding: 2em 3em;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .popup button {
+            margin-top: 1em;
+            padding: 0.5em 2em;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+    <video id="bgVideo" src="https://www.youtube.com/watch?v=DdjtedB34JY" autoplay loop muted></video>
+    <div class="popup" id="popup">
+        <div class="popup-content">
+            <p>Do you want to unmute the video?</p>
+            <button id="unmuteBtn">Unmute & Refresh</button>
+        </div>
+    </div>
+    <script>
+        const popup = document.getElementById('popup');
+        const btn = document.getElementById('unmuteBtn');
+        // YouTube videos cannot be played directly in a <video> tag due to browser and YouTube restrictions.
+        // Use a sample MP4 video instead, or embed YouTube with <iframe>.
+        // Example with MP4:
+        const video = document.getElementById('bgVideo');
+        video.src = "https://www.youtube.com/watch?v=DdjtedB34JY";
+
+        btn.onclick = function() {
+            popup.style.display = 'none';
+            video.muted = false;
+            video.currentTime = 0;
+            video.play();
+        };
+    </script>
+</body>
+</html>
